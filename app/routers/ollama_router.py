@@ -1,5 +1,10 @@
+"""Ollama API Router
+This module defines the FastAPI router for handling Ollama API requests.
+It includes endpoints for chat completions.
+"""
+
+from app.models import ChatRequest, ChatResponse
 from fastapi import APIRouter, HTTPException
-from app.models import ChatRequest, ChatResponse, ChatMessage
 from app.services.ollama_service import OllamaService
 
 router = APIRouter()
@@ -20,16 +25,4 @@ async def ollama_chat(request: ChatRequest):
         )
         return response
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
-
-@router.get("/models")
-async def get_models():
-    """
-    Get available Ollama models
-    """
-    try:
-        models = await ollama_service.list_models()
-        return {"models": models}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail=str(e)) from e

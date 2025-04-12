@@ -25,19 +25,6 @@ class OllamaService:
             "phi3"
         ]
 
-    async def list_models(self) -> List[str]:
-        """
-        List available Ollama models
-        """
-        try:
-            async with httpx.AsyncClient() as client:
-                response = await client.get(f"{self.base_url}/api/tags")
-                data = response.json()
-                return [model["name"] for model in data.get("models", [])]
-        except ImportError:
-            # Fallback to default models if API call fails
-            return self.default_models
-
     async def generate_chat_completion(
         self,
         messages: List[ChatMessage],
@@ -89,7 +76,8 @@ class OllamaService:
                     model=model
                 )
         except httpx.RequestError as e:
-            raise Exception(f"Error communicating with Ollama API: {str(e)}")
+            raise Exception(
+                f"Error communicating with Ollama API: {str(e)}") from e
         except httpx.HTTPStatusError as e:
             raise Exception(
                 f"Ollama API returned error {e.response.status_code}: {e.response.text}")
