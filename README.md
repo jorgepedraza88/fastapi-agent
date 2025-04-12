@@ -1,49 +1,49 @@
 # AI API Service
 
-Una API basada en FastAPI que proporciona endpoints para interactuar con modelos de IA a través de OpenAI y Ollama.
+A FastAPI-based API that provides endpoints to interact with AI models through OpenAI and Ollama.
 
-## Características
+## Features
 
-- API RESTful con FastAPI
-- Soporte para OpenAI API
-- Soporte para Ollama (modelos de IA locales)
-- Documentación interactiva con Swagger UI
+- RESTful API with FastAPI
+- Support for OpenAI API
+- Support for Ollama (local AI models)
+- Interactive documentation with Swagger UI
 
-## Requisitos
+## Requirements
 
 - Python 3.8+
-- OpenAI API Key (para los endpoints de OpenAI)
-- Ollama instalado localmente (para los endpoints de Ollama)
+- OpenAI API Key (for OpenAI endpoints)
+- Ollama installed locally (for Ollama endpoints)
 
-## Instalación
+## Installation
 
-1. Clonar el repositorio:
+1. Clone the repository:
 ```bash
-git clone [URL_DEL_REPOSITORIO]
+git clone [REPOSITORY_URL]
 cd ai-api-service
 ```
 
-2. Crear un entorno virtual e instalar las dependencias:
+2. Create a virtual environment and install dependencies:
 ```bash
 python -m venv venv
-source venv/bin/activate  # En Windows: venv\Scripts\activate
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-3. Configurar variables de entorno:
+3. Configure environment variables:
 ```bash
 cp .env.example .env
 ```
-Editar el archivo `.env` y agregar las claves de API necesarias.
+Edit the `.env` file and add the necessary API keys.
 
-## Uso
+## Usage
 
-1. Iniciar el servidor de desarrollo:
+1. Start the development server:
 ```bash
 python run.py
 ```
 
-2. Acceder a la documentación de la API:
+2. Access the API documentation:
 ```
 http://localhost:8000/docs
 ```
@@ -52,17 +52,17 @@ http://localhost:8000/docs
 
 ### OpenAI
 
-- `POST /api/openai/chat`: Enviar una solicitud de chat a la API de OpenAI
-- `GET /api/openai/models`: Obtener modelos disponibles de OpenAI
+- `POST /api/openai/chat`: Send a chat request to the OpenAI API
+- `GET /api/openai/models`: Get available OpenAI models
 
 ### Ollama
 
-- `POST /api/ollama/chat`: Enviar una solicitud de chat a la API de Ollama
-- `GET /api/ollama/models`: Obtener modelos disponibles de Ollama
+- `POST /api/ollama/chat`: Send a chat request to the Ollama API
+- `GET /api/ollama/models`: Get available Ollama models
 
-## Ejemplo de Uso
+## Usage Example
 
-### Solicitud de chat a OpenAI
+### OpenAI Chat Request
 
 ```python
 import requests
@@ -71,8 +71,8 @@ import json
 url = "http://localhost:8000/api/openai/chat"
 payload = {
     "messages": [
-        {"role": "system", "content": "Eres un asistente útil."},
-        {"role": "user", "content": "Hola, ¿cómo estás?"}
+        {"role": "system", "content": "You are a helpful assistant."},
+        {"role": "user", "content": "Hello, how are you?"}
     ],
     "model": "gpt-3.5-turbo",
     "temperature": 0.7,
@@ -84,7 +84,7 @@ response = requests.post(url, json=payload, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
 
-### Solicitud de chat a Ollama
+### Ollama Chat Request
 
 ```python
 import requests
@@ -93,8 +93,8 @@ import json
 url = "http://localhost:8000/api/ollama/chat"
 payload = {
     "messages": [
-        {"role": "system", "content": "Eres un asistente útil."},
-        {"role": "user", "content": "Hola, ¿cómo estás?"}
+        {"role": "system", "content": "You are a helpful assistant."},
+        {"role": "user", "content": "Hello, how are you?"}
     ],
     "model": "llama3",
     "temperature": 0.7,
@@ -106,6 +106,6 @@ response = requests.post(url, json=payload, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
 
-## Licencia
+## License
 
 [MIT](LICENSE)
